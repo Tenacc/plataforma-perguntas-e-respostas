@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const connection = require('./database/database')
-const perguntaModel = require('./database/Pergunta')
+const Pergunta = require('./database/Pergunta')
 
 //database
 connection
@@ -30,7 +30,12 @@ app.get('/perguntar', (req,res) =>{
 app.post('/salvarpergunta', (req,res) => {
     var titulo = req.body.titulo
     var descricao = req.body.descricao
-    res.send('O titulo é' + titulo +  'e a descricao é ' + descricao)
+    Pergunta.create({
+        titulo: titulo,
+        descricao: descricao
+    }).then(() => {
+        res.redirect('/')
+    })
 
 })
 
