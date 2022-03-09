@@ -20,7 +20,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false}))
 
 app.get('/',(req,res) => {
-    res.render('index')
+    Pergunta.findAll({raw: true}).then(perguntas => {
+        res.render('index', {
+            perguntas: perguntas
+        })
+    })
+    
 })
 
 app.get('/perguntar', (req,res) =>{
