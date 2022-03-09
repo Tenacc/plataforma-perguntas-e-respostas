@@ -1,8 +1,8 @@
 const express = require('express')
-const { get } = require('express/lib/response')
 const app = express()
 const connection = require('./database/database')
 const Pergunta = require('./database/Pergunta')
+const Resposta = require('./database/Resposta')
 
 //database
 connection
