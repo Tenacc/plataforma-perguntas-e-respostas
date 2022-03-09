@@ -1,4 +1,5 @@
 const express = require('express')
+const { get } = require('express/lib/response')
 const app = express()
 const connection = require('./database/database')
 const Pergunta = require('./database/Pergunta')
@@ -44,6 +45,21 @@ app.post('/salvarpergunta', (req,res) => {
         res.redirect('/')
     })
 
+})
+
+app.get('/pergunta/:id', (req,res) =>{
+    var id = req.params.id
+    Pergunta.findOne({
+        where: {id:id}
+    }).then(pergunta => {
+        if(pergunta != undefined) {
+            res.render('pergunta', {
+                pergunta: pergunta
+            })
+        }else {
+            res.redirect('/')
+        }
+    })
 })
 
 
